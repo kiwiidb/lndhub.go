@@ -169,7 +169,8 @@ func main() {
 
 	e.GET("/bolt12/decode/:offer", controllers.NewBolt12Controller(svc).Decode)
 	//invoice streaming
-	secured.GET("/invoices/stream", controllers.NewInvoiceStreamController(svc).StreamInvoices)
+	//Authentication should be done through the query param because this is a websocket
+	e.GET("/invoices/stream", controllers.NewInvoiceStreamController(svc).StreamInvoices)
 
 	// Subscribe to LND invoice updates in the background
 	// CLN: todo: re-write logic
